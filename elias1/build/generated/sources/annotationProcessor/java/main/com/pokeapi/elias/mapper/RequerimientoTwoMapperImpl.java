@@ -1,0 +1,99 @@
+package com.pokeapi.elias.mapper;
+
+import com.pokeapi.elias.dto.RequerimientoTwoResponse;
+import com.pokeapi.elias.entity.movesEntity;
+import com.pokeapi.elias.entity.pokemonEntity;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = "org.mapstruct.ap.MappingProcessor",
+    date = "2026-09-04T23:22:25-0600",
+    comments = "version: 1.6.3, compiler: IncrementalProcessingEnvironment from gradle-java-compiler-worker-9.7.1.jar, environment: Java 25.0.4.1 (Eclipse Adoptium)"
+)
+@Component
+public class RequerimientoTwoMapperImpl implements RequerimientoTwoMapper {
+
+    @Override
+    public RequerimientoTwoResponse toRequerimientoTwoResponse(pokemonEntity entity) {
+        if ( entity == null ) {
+            return null;
+        }
+
+        List<RequerimientoTwoResponse.movesList> moves = null;
+        String name = null;
+        double height = 0.0d;
+        double weight = 0.0d;
+        String description = null;
+
+        moves = toMovesListResponse( entity.getMoves() );
+        name = entity.getName();
+        if ( entity.getHeight() != null ) {
+            height = entity.getHeight();
+        }
+        if ( entity.getWeight() != null ) {
+            weight = entity.getWeight();
+        }
+        description = entity.getDescription();
+
+        List<RequerimientoTwoResponse.typesList> types = toTypesList(entity);
+
+        RequerimientoTwoResponse requerimientoTwoResponse = new RequerimientoTwoResponse( name, types, height, weight, description, moves );
+
+        return requerimientoTwoResponse;
+    }
+
+    @Override
+    public RequerimientoTwoResponse.typesList toRequerimientoTwoResponseTypes(pokemonEntity entity) {
+        if ( entity == null ) {
+            return null;
+        }
+
+        String type_1 = null;
+        String type_2 = null;
+
+        type_1 = entity.getType_1();
+        type_2 = entity.getType_2();
+
+        RequerimientoTwoResponse.typesList typesList = new RequerimientoTwoResponse.typesList( type_1, type_2 );
+
+        return typesList;
+    }
+
+    @Override
+    public RequerimientoTwoResponse.movesList toMovesList(movesEntity move) {
+        if ( move == null ) {
+            return null;
+        }
+
+        String name = null;
+        String type = null;
+        Integer power = null;
+        String accuracy = null;
+
+        name = move.getName();
+        type = move.getType();
+        power = move.getPower();
+        accuracy = String.valueOf( move.getAccuracy() );
+
+        RequerimientoTwoResponse.movesList movesList = new RequerimientoTwoResponse.movesList( name, type, power, accuracy );
+
+        return movesList;
+    }
+
+    @Override
+    public List<RequerimientoTwoResponse.movesList> toMovesListResponse(List<movesEntity> moves) {
+        if ( moves == null ) {
+            return null;
+        }
+
+        List<RequerimientoTwoResponse.movesList> list = new ArrayList<RequerimientoTwoResponse.movesList>( moves.size() );
+        for ( movesEntity movesEntity : moves ) {
+            list.add( toMovesList( movesEntity ) );
+        }
+
+        return list;
+    }
+}
