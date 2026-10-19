@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: elias
+  datasource:
+    url: jdbc:postgresql://172.20.1.39:5432/pokeapipruebatecnica
+    username: poke_user_2
+    password: ).?bD?82]<8!
+  jpa:
+    hibernate:
+      ddl-auto:validate
+
+login:
+  username: elias
+  password: pokeprueba
